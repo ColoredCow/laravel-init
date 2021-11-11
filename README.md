@@ -1,1 +1,2 @@
-# laravel-init
+### Introduction
+:wave: Welcome to Laravel-init boilerplate. 
