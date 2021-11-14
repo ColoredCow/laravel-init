@@ -1,7 +1,7 @@
 {
-    "name": "coloredcow/larvel-init",
+    "name": "coloredcow/laravel-init",
     "type": "project",
-    "description": "Boilerplate for Laravel",
+    "description": "Boiler plate for laravel",
     "keywords": ["framework", "laravel", "ColoredCow", "laravel-init"],
     "license": "MIT",
     "require": {
