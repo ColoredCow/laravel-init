@@ -1,12 +1,15 @@
 ## ColoredCow Portal
 
 ![GitHub issues](https://img.shields.io/github/issues/coloredcow/laravel-init)
+![GitHub issues](https://img.shields.io/github/issues-closed/coloredcow/laravel-init)
+![GitHub pull request](https://img.shields.io/github/issues-pr/coloredcow/laravel-init)
+![GitHub pull request](https://img.shields.io/github/issues-pr-closed/coloredcow/laravel-init)
+![GitHub milestones](https://img.shields.io/github/milestones/all/coloredcow/laravel-init)
 [![Coding Standards](https://github.com/coloredcow/laravel-init/actions/workflows/coding-standards.yml/badge.svg?branch=develop)](https://github.com/coloredcow/laravel-init/actions/workflows/coding-standards.yml)
 
 ### Introduction
 
 :wave: Welcome to Laravel Init. A boilerplate for installing laravel application.
-
 
 ### Installation
 
