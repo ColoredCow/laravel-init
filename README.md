@@ -1,7 +1,7 @@
 ## ColoredCow Portal
 
 ![GitHub issues](https://img.shields.io/github/issues/coloredcow/laravel-init)
-[![Coding Standards](https://github.com/coloredcow/laravel-init/actions/workflows/coding-standards.yml/badge.svg?branch=master)](https://github.com/coloredcow/laravel-init/actions/workflows/coding-standards.yml)
+[![Coding Standards](https://github.com/coloredcow/laravel-init/actions/workflows/coding-standards.yml/badge.svg?branch=develop)](https://github.com/coloredcow/laravel-init/actions/workflows/coding-standards.yml)
 
 ### Introduction
 
