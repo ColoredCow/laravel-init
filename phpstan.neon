@@ -5,7 +5,8 @@ parameters:
 
     paths:
         - app
-        - Modules
+        - resources
+        - config
 
     excludePaths:
 
