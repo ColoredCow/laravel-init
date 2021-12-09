@@ -1,0 +1,18 @@
+includes:
+    - ./vendor/nunomaduro/larastan/extension.neon
+
+parameters:
+
+    paths:
+        - app
+        - resources
+        - config
+
+    excludePaths:
+
+    # The level 8 is the highest level
+    level: 5
+
+    ignoreErrors:
+
+    checkMissingIterableValueType: false
