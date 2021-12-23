@@ -1,4 +1,4 @@
-## ColoredCow Portal
+## Laravel Boilerplate
 
 ![GitHub issues](https://img.shields.io/github/issues/coloredcow/laravel-init)
 ![GitHub issues](https://img.shields.io/github/issues-closed/coloredcow/laravel-init)
@@ -9,17 +9,24 @@
 
 ### Introduction
 
-:wave: Welcome to Laravel Init. A boilerplate for installing laravel application.
+:wave: Welcome to Laravel Init - a boilerplate for installing laravel application. It covers:
+1. One-liner [shell script](./project-setup.sh) to set up your Laravel project.
+2. Pre-commit hooks for [Laravel coding standards](https://github.com/php-fig/fig-standards/blob/master/accepted/PSR-2-coding-style-guide.md). This will lint the code changes during commit. In case coding standard is not followed, it aborts the commit and return warnings.
+3. GitHub [Issues](./.github/ISSUE_TEMPLATE/) and [Pull Requests](./.github/PULL_REQUEST_TEMPLATE.md) templates.
+4. [GitHub Action](https://github.com/ColoredCow/laravel-init/blob/develop/.github/workflows/coding-standards.yml) for coding standards check:
+    - PHP CS - PHP coding linter
+    - ESLint - JavaScript coding linter
+    - Larastan - Laravel static code analyzer
 
 ### Installation
 
 1. Clone the repo using the below command
 	```sh
-	git clone https://github.com/ColoredCow/laravel-init.git
+	git clone https://github.com/ColoredCow/laravel-init your_project_name
 	```
 2. Go to the project directory using below command
 	```sh
-	cd laravel-init
+	cd your_project_name
 	```
 3. Run this command to setup the project
 	```sh
