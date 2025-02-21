@@ -56,4 +56,4 @@ jobs:
 
       # Static analysis using Larastan
       - name: Run Larastan
-        run: ./vendor/bin/phpstan analyse --memory-limit=1G
+        run: ./vendor/bin/phpstan analyse app routes --memory-limit=2G

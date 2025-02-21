@@ -5,13 +5,19 @@ namespace App\Http\Controllers\Auth;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Auth\LoginRequest;
 use App\Models\User;
+use Illuminate\Contracts\Auth\StatefulGuard;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
-use Illuminate\Http\Response;
-use Illuminate\Support\Facades\Auth;
 
 class AuthenticatedSessionController extends Controller
 {
+    protected StatefulGuard $auth;
+
+    public function __construct(StatefulGuard $auth)
+    {
+        $this->auth = $auth;
+    }
+
     /**
      * Handle an incoming authentication request.
      */
@@ -24,7 +30,7 @@ class AuthenticatedSessionController extends Controller
 
         $user = User::where('email', $request->email)->first();
 
-        if (!Auth::attempt($validatedData)) {
+        if (!$this->auth->attempt($validatedData)) {
             return response()->json([
                 'success' => false,
                 'message' => 'Login failed. Please check your credentials.'
@@ -45,7 +51,7 @@ class AuthenticatedSessionController extends Controller
      */
     public function destroy(Request $request): JsonResponse
     {
-        Auth::guard('web')->logout();
+        $this->auth->logout();
 
         $request->session()->invalidate();
 
