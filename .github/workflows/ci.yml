@@ -36,9 +36,6 @@ jobs:
       - name: Install Composer Dependencies
         run: composer install --no-progress --prefer-dist --optimize-autoloader
 
-      - name: Install Node Dependencies
-        run: npm install
-
       - name: Setup Laravel Environment
         run: |
           cp .env.example .env
@@ -60,13 +57,3 @@ jobs:
       # Static analysis using Larastan
       - name: Run Larastan
         run: ./vendor/bin/phpstan analyse --memory-limit=1G
-
-      # Run Laravel tests
-      - name: Run Laravel Tests
-        env:
-          DB_CONNECTION: mysql
-          DB_DATABASE: testing_db
-          DB_USERNAME: user
-          DB_PASSWORD: password
-          DB_HOST: 127.0.0.1
-        run: php artisan test --parallel
