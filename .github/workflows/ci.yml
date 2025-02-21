@@ -57,3 +57,24 @@ jobs:
       # Static analysis using Larastan
       - name: Run Larastan
         run: ./vendor/bin/phpstan analyse app routes --memory-limit=2G
+
+      # Run PHPUnit Tests
+      - name: Run PHPUnit Tests
+        env:
+          DB_CONNECTION: mysql
+          DB_DATABASE: testing_db
+          DB_USERNAME: user
+          DB_PASSWORD: password
+          DB_HOST: 127.0.0.1
+        run: |
+          php artisan config:clear
+          php artisan cache:clear
+          php artisan test --testsuite=Feature --stop-on-failure
+
+      # Optional: Upload Test Results (JUnit format) for better visibility in CI
+      - name: Upload Test Results
+        if: always()
+        uses: actions/upload-artifact@v3
+        with:
+          name: test-results
+          path: storage/test-results
