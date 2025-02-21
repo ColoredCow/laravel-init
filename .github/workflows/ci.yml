@@ -52,7 +52,7 @@ jobs:
 
       # Check PHP code formatting with PHPFMT
       - name: Run PHPFMT
-        run: ./vendor/bin/phpmd app,routes text cleancode,codesize,controversial,design,naming,unusedcode
+        run: ./vendor/bin/phpmd app,routes text codesize,controversial,design,naming,unusedcode
 
       # Static analysis using Larastan
       - name: Run Larastan

@@ -2,8 +2,10 @@
 
 namespace App\Providers;
 
-use Illuminate\Contracts\Auth\Access\Gate as GateContract;
+
+use Illuminate\Auth\Notifications\ResetPassword;
 use Illuminate\Support\ServiceProvider;
+use Illuminate\Support\Facades\Gate;
 
 class AppServiceProvider extends ServiceProvider
 {
@@ -18,11 +20,17 @@ class AppServiceProvider extends ServiceProvider
     /**
      * Bootstrap any application services.
      */
-    public function boot(GateContract $gate): void
+    public function boot(): void
     {
-        // Use the injected GateContract instance
-        $gate->after(function ($user) {
-            return $user->hasRole('admin') ? true : null;
+        ResetPassword::createUrlUsing(function (object $notifiable, string $token) {
+            return config('app.frontend_url')."/password-reset/$token?email={$notifiable->getEmailForPasswordReset()}";
+        });
+
+        Gate::after(function ($user, $ability) {
+           if($user->hasRole('admin')){
+               return true;
+           }
+           return false;
         });
     }
 }

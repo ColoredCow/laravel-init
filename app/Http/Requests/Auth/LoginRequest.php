@@ -4,31 +4,13 @@ namespace App\Http\Requests\Auth;
 
 use Illuminate\Auth\Events\Lockout;
 use Illuminate\Foundation\Http\FormRequest;
-use Illuminate\Contracts\Auth\StatefulGuard;
-use Illuminate\Cache\RateLimiter as RateLimiterContract;
-use Illuminate\Contracts\Translation\Translator;
-use Illuminate\Validation\ValidationException;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\RateLimiter;
 use Illuminate\Support\Str;
+use Illuminate\Validation\ValidationException;
 
 class LoginRequest extends FormRequest
 {
-    protected $auth;
-    protected $rateLimiter;
-    protected $translator;
-    protected $stringHelper;
-
-    /**
-     * Constructor to inject dependencies.
-     */
-    public function __construct(StatefulGuard $auth, RateLimiterContract $rateLimiter, Translator $translator, Str $stringHelper)
-    {
-        parent::__construct();
-        $this->auth = $auth;
-        $this->rateLimiter = $rateLimiter;
-        $this->translator = $translator;
-        $this->stringHelper = $stringHelper;
-    }
-
     /**
      * Determine if the user is authorized to make this request.
      */
@@ -59,15 +41,15 @@ class LoginRequest extends FormRequest
     {
         $this->ensureIsNotRateLimited();
 
-        if (!$this->auth->attempt($this->only('email', 'password'), $this->boolean('remember'))) {
-            $this->rateLimiter->hit($this->throttleKey());
+        if (! Auth::attempt($this->only('email', 'password'), $this->boolean('remember'))) {
+            RateLimiter::hit($this->throttleKey());
 
-            throw new ValidationException($this->getMessageBag(), [
-                'email' => $this->translator->get('auth.failed'),
+            throw ValidationException::withMessages([
+                'email' => __('auth.failed'),
             ]);
         }
 
-        $this->rateLimiter->clear($this->throttleKey());
+        RateLimiter::clear($this->throttleKey());
     }
 
     /**
@@ -77,16 +59,16 @@ class LoginRequest extends FormRequest
      */
     public function ensureIsNotRateLimited(): void
     {
-        if (!$this->rateLimiter->tooManyAttempts($this->throttleKey(), 5)) {
+        if (! RateLimiter::tooManyAttempts($this->throttleKey(), 5)) {
             return;
         }
 
         event(new Lockout($this));
 
-        $seconds = $this->rateLimiter->availableIn($this->throttleKey());
+        $seconds = RateLimiter::availableIn($this->throttleKey());
 
-        throw new ValidationException($this->getMessageBag(), [
-            'email' => $this->translator->get('auth.throttle', [
+        throw ValidationException::withMessages([
+            'email' => trans('auth.throttle', [
                 'seconds' => $seconds,
                 'minutes' => ceil($seconds / 60),
             ]),
@@ -98,6 +80,6 @@ class LoginRequest extends FormRequest
      */
     public function throttleKey(): string
     {
-        return $this->stringHelper->transliterate($this->stringHelper->lower($this->input('email')) . '|' . $this->ip());
+        return Str::transliterate(Str::lower($this->input('email')).'|'.$this->ip());
     }
 }
