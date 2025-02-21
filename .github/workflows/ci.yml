@@ -70,11 +70,3 @@ jobs:
           php artisan config:clear
           php artisan cache:clear
           php artisan test --testsuite=Feature --stop-on-failure
-
-      # Optional: Upload Test Results (JUnit format) for better visibility in CI
-      - name: Upload Test Results
-        if: always()
-        uses: actions/upload-artifact@v3
-        with:
-          name: test-results
-          path: storage/test-results
