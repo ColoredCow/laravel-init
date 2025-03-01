@@ -4,12 +4,13 @@ namespace App\Http\Controllers\Auth;
 
 use App\Http\Controllers\Controller;
 use App\Models\User;
-use Illuminate\Auth\Events\Registered;
 use Illuminate\Http\Request;
 use Illuminate\Http\JsonResponse;
-use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Validation\Rules;
+use App\Mail\OTPMail;
+use Illuminate\Support\Facades\Mail;
+use Carbon\Carbon;
 
 class RegisteredUserController extends Controller
 {
@@ -22,23 +23,24 @@ class RegisteredUserController extends Controller
     {
         $request->validate([
             'name' => ['required', 'string', 'max:255'],
-            'email' => ['required', 'string', 'lowercase', 'email', 'max:255', 'unique:' . User::class],
+            'email' => ['required', 'email', 'unique:users'],
             'password' => ['required', 'confirmed', Rules\Password::defaults()],
         ]);
+
+        $otp = rand(100000, 999999);
 
         $user = User::create([
             'name' => $request->name,
             'email' => $request->email,
-            'password' => Hash::make($request->string('password')),
+            'password' => Hash::make($request->password),
+            'otp' => $otp,
+            'otp_expires_at' => Carbon::now()->addMinutes(10),
         ]);
 
-        event(new Registered($user));
-
-        Auth::login($user);
+        Mail::to($user->email)->send(new OTPMail($otp));
 
         return response()->json([
-            'message' => 'User registered successfully',
-            'user' => $user
+            'message' => 'User registered successfully. Please verify OTP.',
         ], 201);
     }
 }
