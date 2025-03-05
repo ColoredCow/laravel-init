@@ -11,6 +11,7 @@ use Illuminate\Validation\Rules;
 use App\Mail\OTPMail;
 use Illuminate\Support\Facades\Mail;
 use Carbon\Carbon;
+use Illuminate\Auth\Events\Registered;
 
 class RegisteredUserController extends Controller
 {
@@ -37,7 +38,8 @@ class RegisteredUserController extends Controller
             'otp_expires_at' => Carbon::now()->addMinutes(10),
         ]);
 
-        Mail::to($user->email)->send(new OTPMail($otp));
+        // Mail::to($user->email)->send(new OTPMail($otp));
+        event(new Registered($user));
 
         return response()->json([
             'message' => 'User registered successfully. Please verify OTP.',
