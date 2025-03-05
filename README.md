@@ -21,6 +21,36 @@ Laravel is a web application framework with expressive, elegant syntax. We belie
 
 Laravel is accessible, powerful, and provides tools required for large, robust applications.
 
+## Installation
+
+Follow these steps to set up the Laravel Init project:
+
+1. Clone the repository:
+   ```sh
+   git clone https://github.com/ColoredCow/laravel-init.git
+   ```
+2. Navigate into the project directory:
+   ```sh
+   cd laravel-init
+   ```
+3. Install dependencies using Composer:
+   ```sh
+   composer install
+   ```
+4. Create a new database for the Laravel Init project (MySQL is used).
+5. Copy the example environment file:
+   ```sh
+   cp .env.example .env
+   ```
+6. Generate the application key:
+   ```sh
+   php artisan key:generate
+   ```
+7. Run database migrations:
+   ```sh
+   php artisan migrate
+   ```
+
 ## Learning Laravel
 
 Laravel has the most extensive and thorough [documentation](https://laravel.com/docs) and video tutorial library of all modern web application frameworks, making it a breeze to get started with the framework.
