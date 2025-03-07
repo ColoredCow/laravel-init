@@ -20,7 +20,10 @@ test('email can be verified', function () {
 
     Event::assertDispatched(Verified::class);
     expect($user->fresh()->hasVerifiedEmail())->toBeTrue();
-    $response->assertRedirect(config('app.frontend_url').'/dashboard?verified=1');
+
+    // ✅ Assert JSON response instead of redirect
+    $response->assertStatus(200)
+             ->assertJson(['message' => 'Email verified successfully.']);
 });
 
 test('email is not verified with invalid hash', function () {
@@ -32,7 +35,11 @@ test('email is not verified with invalid hash', function () {
         ['id' => $user->id, 'hash' => sha1('wrong-email')]
     );
 
-    $this->actingAs($user)->get($verificationUrl);
+    $response = $this->actingAs($user)->get($verificationUrl);
 
     expect($user->fresh()->hasVerifiedEmail())->toBeFalse();
+
+    // ✅ Also assert correct error response
+    $response->assertStatus(403)
+             ->assertJson(['message' => 'Invalid verification link.']);
 });
