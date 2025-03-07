@@ -15,12 +15,46 @@ Boiler Plate is a pre-built authentication system that provides reusable functio
 
 Follow these steps to set up and use the Boiler Plate application:
 
+<<<<<<< HEAD
 ### Prerequisites
 Ensure you have the following installed on your system:
 - PHP (>=8.0)
 - Composer
 - MySQL
 - Laravel (>=11)
+=======
+## Installation
+
+Follow these steps to set up the Laravel Init project:
+
+1. Clone the repository:
+   ```sh
+   git clone https://github.com/ColoredCow/laravel-init.git
+   ```
+2. Navigate into the project directory:
+   ```sh
+   cd laravel-init
+   ```
+3. Install dependencies using Composer:
+   ```sh
+   composer install
+   ```
+4. Create a new database for the Laravel Init project (MySQL is used).
+5. Copy the example environment file:
+   ```sh
+   cp .env.example .env
+   ```
+6. Generate the application key:
+   ```sh
+   php artisan key:generate
+   ```
+7. Run database migrations:
+   ```sh
+   php artisan migrate
+   ```
+
+## Learning Laravel
+>>>>>>> 5c5396cf733e39c4972316fc0ed6f4282948d5c6
 
 
 ### Setup Instructions
@@ -84,3 +118,7 @@ Contributions are welcome! Feel free to fork this repository, submit issues, or 
 
 For any questions or support, feel free to reach out to the repository maintainers or open an issue.
 
+<<<<<<< HEAD
+=======
+The Laravel framework is open-sourced software licensed under the [MIT license](https://opensource.org/licenses/MIT).
+>>>>>>> 5c5396cf733e39c4972316fc0ed6f4282948d5c6
