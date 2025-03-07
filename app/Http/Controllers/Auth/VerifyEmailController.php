@@ -13,7 +13,7 @@ class VerifyEmailController extends Controller
     /**
      * Mark the given user's email address as verified.
      */
-    public function __invoke(Request $request, $userId, $hash): JsonResponse
+    public function __invoke( $userId, $hash): JsonResponse
     {
         $user = User::findOrFail($userId);
 
