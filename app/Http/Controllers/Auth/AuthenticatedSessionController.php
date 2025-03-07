@@ -23,10 +23,10 @@ class AuthenticatedSessionController extends Controller
 
         $user = User::where('email', $request->email)->first();
 
-        if (!Auth::attempt($validatedData)) {
+        if (! Auth::attempt($validatedData)) {
             return response()->json([
                 'success' => false,
-                'message' => 'Login failed. Please check your credentials.'
+                'message' => 'Login failed. Please check your credentials.',
             ], 401);
         }
 
@@ -35,7 +35,7 @@ class AuthenticatedSessionController extends Controller
         return response()->json([
             'success' => true,
             'access_token' => $token,
-            'user' => $user
+            'user' => $user,
         ], 200);
     }
 
@@ -51,7 +51,7 @@ class AuthenticatedSessionController extends Controller
         $request->session()->regenerateToken();
 
         return response()->json([
-            'message' => 'Logged out successfully'
+            'message' => 'Logged out successfully',
         ]);
     }
 }

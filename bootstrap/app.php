@@ -18,8 +18,8 @@ use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 
 return Application::configure(basePath: dirname(__DIR__))
     ->withRouting(
-        web: __DIR__ . '/../routes/web.php',
-        api: __DIR__ . '/../routes/api.php',
+        web: __DIR__.'/../routes/web.php',
+        api: __DIR__.'/../routes/api.php',
         health: '/up',
     )
     ->withMiddleware(function (Middleware $middleware) {
@@ -42,19 +42,19 @@ return Application::configure(basePath: dirname(__DIR__))
         $exceptions->render(function (ModelNotFoundException $e) {
             return response()->json([
                 'success' => false,
-                'message' => 'Resource not found'
+                'message' => 'Resource not found',
             ], 404);
         });
         $exceptions->render(function (NotFoundHttpException $e) {
             return response()->json([
                 'success' => false,
-                'message' => 'Resource not found'
+                'message' => 'Resource not found',
             ], 404);
         });
         $exceptions->render(function (AuthorizationException $e) {
             return response()->json([
                 'success' => false,
-                'message' => 'You are not authorized to perform this action'
+                'message' => 'You are not authorized to perform this action',
             ], 403);
         });
 
@@ -62,26 +62,26 @@ return Application::configure(basePath: dirname(__DIR__))
             return response()->json([
                 'success' => false,
                 'message' => 'Validation failed',
-                'errors' => $e->errors()
+                'errors' => $e->errors(),
             ], 422);
         });
         $exceptions->render(function (MethodNotAllowedHttpException $e) {
             return response()->json([
                 'success' => false,
-                'message' => 'Method is not allowed for the requested route'
+                'message' => 'Method is not allowed for the requested route',
             ], 405);
         });
         $exceptions->render(function (AccessDeniedHttpException $e) {
             return response()->json([
                 'success' => false,
-                'message' => 'You are not authorized to perform this action'
+                'message' => 'You are not authorized to perform this action',
             ], 403);
         });
         $exceptions->render(function (\Throwable $e) {
             return response()->json([
                 'success' => false,
                 'message' => 'An error occurred',
-                'error' => $e->getMessage()
+                'error' => $e->getMessage(),
             ], 500);
         });
     })->create();

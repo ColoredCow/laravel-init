@@ -1,10 +1,10 @@
 <?php
 
-use App\Http\Controllers\Auth\RegisteredUserController;
+use App\Http\Controllers\Auth\AuthController;
 use App\Http\Controllers\Auth\AuthenticatedSessionController;
+use App\Http\Controllers\Auth\RegisteredUserController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
-use App\Http\Controllers\Auth\AuthController;
 
 Route::post('/verify-otp', [AuthController::class, 'verifyOtp']);
 
@@ -21,7 +21,7 @@ Route::middleware(['auth:sanctum'])->group(function () {
         return [
             'user' => $request->user(),
             'roles' => $request->user()->roles->pluck('name'),
-            'permissions' => $request->user()->getPermissionsViaRoles()
+            'permissions' => $request->user()->getPermissionsViaRoles(),
         ];
     });
 
