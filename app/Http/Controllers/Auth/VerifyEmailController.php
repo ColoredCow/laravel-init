@@ -13,9 +13,9 @@ class VerifyEmailController extends Controller
     /**
      * Mark the given user's email address as verified.
      */
-    public function __invoke(Request $request, $id, $hash): JsonResponse
+    public function __invoke(Request $request, $userId, $hash): JsonResponse
     {
-        $user = User::findOrFail($id);
+        $user = User::findOrFail($userId);
 
         if (! hash_equals((string) $hash, sha1($user->getEmailForVerification()))) {
             return response()->json(['message' => 'Invalid verification link.'], 403);

@@ -95,7 +95,7 @@ class DatabaseSeeder extends Seeder
                 'password' => bcrypt($userData['password']),
             ]);
             // Store users in a nested array structure
-            if (!isset($createdUsers[$userData['role']])) {
+            if (! isset($createdUsers[$userData['role']])) {
                 $createdUsers[$userData['role']] = [];
             }
             $createdUsers[$userData['role']][] = $user;
