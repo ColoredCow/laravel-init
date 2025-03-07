@@ -38,7 +38,6 @@ class RegisteredUserController extends Controller
             'otp_expires_at' => Carbon::now()->addMinutes(10),
         ]);
 
-        // Mail::to($user->email)->send(new OTPMail($otp));
         event(new Registered($user));
 
         return response()->json([
