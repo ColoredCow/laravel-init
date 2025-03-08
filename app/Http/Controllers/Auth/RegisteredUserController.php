@@ -34,7 +34,6 @@ class RegisteredUserController extends Controller
 
         Auth::login($user);
 
-        // Send verification OTP to the user's email
         event(new Registered($user));
 
         return response()->json([
