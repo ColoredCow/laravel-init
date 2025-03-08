@@ -21,14 +21,13 @@ class AuthenticatedSessionController extends Controller
             'password' => ['required', 'string'],
         ]);
 
-        // $user = User::where('email', $request->email)->first();
         $user = User::where('email', $request->email)->first();
 
         if (!$user || is_null($user->email_verified_at)) {
             return response()->json([
                 'success' => false,
                 'message' => 'Login failed. Please verify your email address.'
-            ], 401); // Use 401 for unauthorized access
+            ], 401);
         }        
 
         if (!Auth::attempt($validatedData)) {
