@@ -32,13 +32,13 @@ class RegisteredUserController extends Controller
             'password' => Hash::make($request->string('password')),
         ]);
 
-        event(new Registered($user));
-
         Auth::login($user);
 
+        // Send verification OTP to the user's email
+        event(new Registered($user));
+
         return response()->json([
-            'message' => 'User registered successfully',
-            'user' => $user
+            'message' => 'User registered successfully. Please verify OTP.',
         ], 201);
     }
 }
