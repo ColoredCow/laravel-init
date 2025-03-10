@@ -33,9 +33,10 @@ test('email is not verified with invalid hash', function () {
         ['id' => $user->id, 'hash' => sha1('wrong-email')]
     );
 
-    $this->actingAs($user)->get($verificationUrl);
+    $response = $this->actingAs($user)->get($verificationUrl); // ✅ Store response
 
     expect($user->fresh()->hasVerifiedEmail())->toBeFalse();
-    $response->assertStatus(403)
-    ->assertJson(['message' => 'Invalid verification link.']);
+    
+    $response->assertStatus(403) // ✅ Now response is defined
+        ->assertJson(['message' => 'Invalid verification link.']);
 });
