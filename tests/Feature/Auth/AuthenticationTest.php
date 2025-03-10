@@ -12,7 +12,7 @@ test('users can authenticate using the login screen', function () {
     ]);
 
     $this->assertAuthenticated();
-    $response->assertStatus(200);
+    $response->assertNoContent();
 });
 
 test('users can not authenticate with invalid password', function () {
@@ -25,3 +25,15 @@ test('users can not authenticate with invalid password', function () {
 
     $this->assertGuest();
 });
+<<<<<<< HEAD
+=======
+
+test('users can logout', function () {
+    $user = User::factory()->create();
+
+    $response = $this->actingAs($user)->post('/logout');
+
+    $this->assertGuest();
+    $response->assertNoContent();
+});
+>>>>>>> 827def01ac7b25af5f9caff5e1c4801c8318acdd
