@@ -19,7 +19,27 @@ class AuthenticatedSessionController extends Controller
 
         $request->session()->regenerate();
 
-        return response()->noContent();
+        if (!$user || is_null($user->email_verified_at)) {
+            return response()->json([
+                'success' => false,
+                'message' => 'Login failed. Please verify your email address.'
+            ], 401);
+        }        
+
+        if (!Auth::attempt($validatedData)) {
+            return response()->json([
+                'success' => false,
+                'message' => 'Login failed. Please check your credentials.'
+            ], 401);
+        }
+
+        $token = $user->createToken($user->name)->plainTextToken;
+
+        return response()->json([
+            'success' => true,
+            'access_token' => $token,
+            'user' => $user
+        ], 200);
     }
 
     /**

@@ -22,12 +22,10 @@ Follow these steps to set up and use the application:
    ```sh
    git clone https://github.com/ColoredCow/laravel-init.git
    ```
-
 2. Navigate into the project directory:
    ```sh
    cd laravel-init
    ```
-
 3. Install dependencies using Composer:
    ```sh
    composer install
@@ -52,7 +50,6 @@ Follow these steps to set up and use the application:
    ```sh
    php artisan key:generate
    ```
-
 7. Run database migrations:
    ```sh
    php artisan migrate
