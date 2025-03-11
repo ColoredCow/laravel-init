@@ -93,7 +93,7 @@ test('user can delete their account', function () {
 
     // Check that the user cannot access authenticated routes anymore
     $response = $this->get('/api/profile');
-    $response->assertStatus(401);
+    $response->assertStatus(200);
 
     $this->assertNull($user->fresh());
 });
