@@ -85,13 +85,11 @@ test('user can delete their account', function () {
             'status' => 'account-deleted',
         ]);
 
-    // Check that the user's tokens have been deleted
     $this->assertDatabaseMissing('personal_access_tokens', [
         'tokenable_id' => $user->id,
         'tokenable_type' => 'App\Models\User',
     ]);
 
-    // Check that the user cannot access authenticated routes anymore
     $response = $this->get('/api/profile');
     $response->assertStatus(200);
 
