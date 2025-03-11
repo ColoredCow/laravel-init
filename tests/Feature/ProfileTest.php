@@ -103,7 +103,6 @@ test('correct password must be provided to delete account', function () {
 
     $response = $this
         ->actingAs($user, 'sanctum')
-        ->from('/api/profile')
         ->delete('/api/profile', [
             'password' => 'wrong-password',
         ]);
