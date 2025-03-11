@@ -49,7 +49,9 @@ class ProfileController extends Controller
 
         $user = $request->user();
 
-        $request->user()->currentAccessToken()->delete();
+        if ($token = $request->user()->currentAccessToken()) {
+            $token->delete();
+        }
 
         $user->delete();
 
