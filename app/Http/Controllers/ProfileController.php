@@ -5,7 +5,6 @@ namespace App\Http\Controllers;
 use App\Http\Requests\ProfileUpdateRequest;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Auth;
 
 class ProfileController extends Controller
 {
@@ -50,7 +49,7 @@ class ProfileController extends Controller
 
         $user = $request->user();
 
-        $user->tokens()->delete();
+        $request->user()->currentAccessToken()->delete();
 
         $user->delete();
 
