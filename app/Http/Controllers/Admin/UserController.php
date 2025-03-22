@@ -11,7 +11,7 @@ class UserController extends Controller
 {
     public function index()
     {
-        $users = User::with('roles')->paginate(10); // Adjust the number of users per page as needed
+        $users = User::with('roles')->paginate(10);
         return response()->json($users);
     }
 
