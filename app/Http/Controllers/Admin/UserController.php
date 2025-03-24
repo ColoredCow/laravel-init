@@ -31,4 +31,10 @@ class UserController extends Controller
         $roles = Role::all();
         return response()->json($roles);
     }
+
+    public function destroy(User $user)
+    {
+        $user->delete();
+        return response()->json(['message' => 'User deleted successfully']);
+    }
 }
