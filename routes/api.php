@@ -9,7 +9,7 @@ Route::middleware(['auth:sanctum'])->get('/user', function (Request $request) {
     return response()->json($user);
 });
 
-Route::middleware(['auth:sanctum'])->prefix('admin')->group(function () {
+Route::middleware(['auth:sanctum'])->group(function () {
     Route::get('/users', [UserController::class, 'index']);
     Route::put('/users/{user}/roles', [UserController::class, 'updateRoles']);
     Route::get('/roles', [UserController::class, 'getRoles']);
