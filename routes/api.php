@@ -14,9 +14,9 @@ Route::middleware(['auth:sanctum'])->group(function () {
         Route::delete('/profile', 'destroy')->name('profile.destroy');
     });
 
-    Route::controller(UserController::class)->group(function () {
+    Route::controller(UserController::class)->prefix('admin')->group(function () {
         Route::get('/users', 'index')->name('users.show');
-        Route::patch('/users/{user}/roles', 'updateRoles')->name('users.update');
-        Route::delete('/roles', 'getRoles')->name('users.roles');
+        Route::put('/users/{user}/roles', 'updateRoles')->name('users.update');
+        Route::get('/roles', 'getRoles')->name('users.roles');
     });
 });
