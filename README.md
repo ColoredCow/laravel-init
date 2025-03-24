@@ -1,4 +1,3 @@
-
 # Boilerplate Application
 
 ## About
@@ -48,34 +47,51 @@ Follow these steps to set up and use the application:
    DB_PASSWORD=
    ```
 
-6. Generate the application key:
+6. Configure your mail settings for email verification:
+   Registration requires email verification, so ensure your mail settings are correctly configured in the `.env` file:
+   ```env
+   MAIL_MAILER=smtp
+   MAIL_SCHEME=null
+   MAIL_HOST=localhost
+   MAIL_PORT=1025
+   MAIL_USERNAME=maildev
+   MAIL_PASSWORD=maildev
+   ```
+
+7. Generate the application key:
    ```sh
    php artisan key:generate
    ```
 
-7. Run database migrations:
+8. Run database migrations:
    ```sh
    php artisan migrate
    ```
 
-8. (Optional) Seed the database with default data:
+9. (Optional) Seed the database with default data:
    ```sh
    php artisan db:seed
    ```
 
-9. Start the development server:
-   -  Using `serve`
+10. Start the development server:
+    -  Using `serve`
       ```sh
       php artisan serve
       ```
       Your application should now be running at [**http://127.0.0.1:8000**](http://127.0.0.1:8000)
-   - Using [Laravel Valet](https://laravel.com/docs/12.x/valet#main-content)
+    - Using [Laravel Valet](https://laravel.com/docs/12.x/valet#main-content)
       ```sh
       valet link laravel-init
 
       valet secure laravel-init
       ```
       Your application should now be running at [**https://laravel-init.test**](https://laravel-init.test)
+
+## Test Admin Login
+
+You can use the following test admin credentials to log in:
+- **Email:** admin@admin.com
+- **Password:** admin@123
 
 ## Contribution
 Contributions are welcome! Feel free to fork this repository, submit issues, or make pull requests to improve the Boiler Plate application.
