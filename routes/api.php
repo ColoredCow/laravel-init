@@ -1,16 +1,22 @@
 <?php
 
+use App\Http\Controllers\ProfileController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Admin\UserController;
 
-Route::middleware(['auth:sanctum'])->get('/user', function (Request $request) {
-    $user = $request->user()->load('roles');
-    return response()->json($user);
-});
+Route::middleware(['auth:sanctum'])->group(function () {
+    Route::get('/user', fn (Request $request) => $request->user());
 
-Route::middleware(['auth:sanctum'])->prefix('admin')->group(function () {
-    Route::get('/users', [UserController::class, 'index']);
-    Route::put('/users/{user}/roles', [UserController::class, 'updateRoles']);
-    Route::get('/roles', [UserController::class, 'getRoles']);
+    Route::controller(ProfileController::class)->group(function () {
+        Route::get('/profile', 'show')->name('profile.show');
+        Route::patch('/profile', 'update')->name('profile.update');
+        Route::delete('/profile', 'destroy')->name('profile.destroy');
+    });
+
+    Route::controller(UserController::class)->prefix('admin')->group(function () {
+        Route::get('/users', 'index')->name('users.show');
+        Route::put('/users/{user}/roles', 'updateRoles')->name('users.update');
+        Route::get('/roles', 'getRoles')->name('users.roles');
+    });
 });
