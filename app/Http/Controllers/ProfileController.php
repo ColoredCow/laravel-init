@@ -10,6 +10,7 @@ use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Redirect;
 use Illuminate\Validation\Rules\Password;
 use Illuminate\View\View;
+use Illuminate\Http\JsonResponse;
 
 class ProfileController extends Controller
 {
@@ -26,18 +27,19 @@ class ProfileController extends Controller
     /**
      * Update the user's password.
      */
-    public function updatePassword(Request $request): RedirectResponse
+    public function updatePassword(Request $request)
     {
         $request->validate([
             'password' => ['required', 'confirmed', Password::min(8)],
         ]);
-
+    
         $user = $request->user();
         $user->password = Hash::make($request->password);
         $user->save();
-
-        return Redirect::back()->with('status', 'password-updated');
+    
+        return response()->json(['message' => 'Password updated successfully!']);
     }
+    
 
     /**
      * Update the user's profile information.
