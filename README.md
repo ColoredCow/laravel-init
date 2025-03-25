@@ -7,7 +7,6 @@ Boilerplate is a pre-built authentication system that provides reusable function
 ## Features
 - User Registration & Login
 - Email Verification
-- OTP-based Authentication
 - Profile Management
 - Logout Functionality
 
