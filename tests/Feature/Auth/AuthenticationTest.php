@@ -1,6 +1,7 @@
 <?php
 
 use App\Models\User;
+use Illuminate\Support\Facades\Session;
 
 test('users can authenticate using the login screen', function () {
     $user = User::factory()->create([
