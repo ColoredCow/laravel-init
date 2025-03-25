@@ -1,17 +1,24 @@
 <?php
 
 use App\Models\User;
+use Illuminate\Support\Facades\Session;
 
 test('users can authenticate using the login screen', function () {
-    $user = User::factory()->create();
+    $user = User::factory()->create([
+        'password' => bcrypt('password'),
+    ]);
+
+    Session::start();
+    $csrfToken = csrf_token();
 
     $response = $this->post('/login', [
         'email' => $user->email,
         'password' => 'password',
+        '_token' => $csrfToken,
     ]);
 
     $this->assertAuthenticated();
-    $response->assertNoContent();
+    $response->assertStatus(204);
 });
 
 test('users can not authenticate with invalid password', function () {
@@ -28,8 +35,14 @@ test('users can not authenticate with invalid password', function () {
 test('users can logout', function () {
     $user = User::factory()->create();
 
-    $response = $this->actingAs($user)->post('/logout');
+    $this->actingAs($user);
+    Session::start();
+    $csrfToken = csrf_token();
+
+    $response = $this->post('/logout', [
+        '_token' => $csrfToken,
+    ]);
 
     $this->assertGuest();
-    $response->assertNoContent();
+    $response->assertStatus(204);
 });
