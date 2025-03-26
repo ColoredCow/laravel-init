@@ -1,11 +1,12 @@
 {
     "$schema": "https://getcomposer.org/schema.json",
-    "name": "laravel/laravel",
+    "name": "coloredcow/laravel-init",
     "type": "project",
-    "description": "The skeleton application for the Laravel framework.",
+    "description": "Boilerplate application for laravel-init.",
     "keywords": [
         "laravel",
-        "framework"
+        "framework",
+        "coloredcow"
     ],
     "license": "MIT",
     "require": {
