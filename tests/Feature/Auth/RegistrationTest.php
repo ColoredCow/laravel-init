@@ -1,8 +1,6 @@
 <?php
 
-use App\Models\User;
 use Illuminate\Support\Facades\Session;
-use Illuminate\Support\Facades\Hash;
 
 test('new users can register', function () {
     $this->withoutMiddleware();
