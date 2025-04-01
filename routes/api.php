@@ -1,14 +1,15 @@
 <?php
 
-use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Admin\UserController;
 use App\Http\Controllers\ProfileController;
+use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Route;
 
 Route::middleware(['auth:sanctum'])->group(function () {
     // Authenticated User Information
     Route::get('/user', function (Request $request) {
         $user = $request->user()->load('roles');
+
         return response()->json($user);
     });
 
@@ -22,4 +23,3 @@ Route::middleware(['auth:sanctum'])->group(function () {
     Route::put('/profile/password', [ProfileController::class, 'updatePassword']);
     Route::delete('/users/{user}', [UserController::class, 'destroy']);
 });
-

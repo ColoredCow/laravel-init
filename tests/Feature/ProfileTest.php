@@ -13,7 +13,7 @@ test('authenticated user can update password', function () {
     ]);
 
     $response->assertStatus(200)
-             ->assertJson(['message' => 'Password updated successfully!']);
+        ->assertJson(['message' => 'Password updated successfully!']);
 
     $this->assertTrue(Hash::check('new-password', $user->refresh()->password));
 });
@@ -28,5 +28,5 @@ test('password update fails with invalid data', function () {
     ]);
 
     $response->assertStatus(422)
-             ->assertJsonValidationErrors(['password']);
+        ->assertJsonValidationErrors(['password']);
 });
