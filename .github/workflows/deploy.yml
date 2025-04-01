@@ -8,7 +8,7 @@ jobs:
     name: build
     runs-on: ubuntu-latest
 
-    # uses GitHub environment
+
     environment:
       name: Staging
       url: "https://staging.example.com"
