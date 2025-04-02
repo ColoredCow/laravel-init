@@ -86,7 +86,7 @@ Follow these steps to set up and use the application:
       ```
       Your application should now be running at [**https://laravel-init.test**](https://laravel-init.test)
 
-## Test Admin Login
+11. Follow the [Deployment Guidelines](docs/deployment.md) for setting up the application on a live server.
 
 You can use the following test admin credentials to log in:
 - **Email:** admin@admin.com

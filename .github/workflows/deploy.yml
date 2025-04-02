@@ -1,0 +1,42 @@
+name: Staging Deployment
+on:
+  push:
+    branches: [main]
+
+jobs:
+  build:
+    name: build
+    runs-on: ubuntu-latest
+
+
+    environment:
+      name: Staging
+      url: "https://staging.example.com"
+
+    steps:
+      - uses: actions/checkout@v2
+      - name: Deploy to staging
+        uses: appleboy/ssh-action@master
+        env:
+          SSH_BUILD_DIRECTORY: ${{ secrets.SSH_BUILD_DIRECTORY }}
+        with:
+          host: ${{ secrets.SSH_HOST }}
+          username: ${{ secrets.SSH_USERNAME }}
+          key: ${{ secrets.SSH_PRIVATE_KEY }}
+          envs: SSH_BUILD_DIRECTORY
+          script: |
+            cd $SSH_BUILD_DIRECTORY
+
+            echo "Pulling latest code"
+            sudo git checkout -f
+            sudo git pull origin main
+            sudo /usr/bin/php82 artisan migrate
+
+            echo "Running composer"
+            sudo /usr/bin/php82 /usr/bin/composer install --no-ansi --no-interaction --no-scripts --no-progress --prefer-dist --optimize-autoloader
+            sudo /usr/bin/php82 /usr/bin/composer dump-autoload
+
+            echo "Optimizing Laravel app"
+            sudo /usr/bin/php82 optimize
+
+            echo "Deployment to staging completed"
