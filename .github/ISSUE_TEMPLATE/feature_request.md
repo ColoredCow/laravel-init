@@ -1,19 +1,16 @@
----
-name: Feature request
-about: Suggest an idea for this project
-title: ""
-labels: "Priority: Idea, Type: Feature"
-assignees: ""
----
+Targets -- Add link to issue item --
+<!---
+If there is an open issue, please link to the issue here by replacing [ISSUE_ID]. For eg. #1202
+-->
 
-_As a [type of user] I want to [...] in order to [achieve XY goal]._
-A short summary of the feature: Who would use this new feature? And what is the objective or use case in real life?
+## Description of the changes
+<!---
+Describe your changes or approach in detail. Why these changes are required? What was implemented earlier and what you implemented?
+-->
 
-**Objective**
-Elaborate on the use case and the goals the user wants to achieve. This is independent of the exact feature in the app and helps us to think of other designs that might serve that objective even better.
-
-**Proposed Solutions & Alternatives**
-A clear and concise description of the proposed solution for our app, including possible alternatives you've considered.
-
-**Additional context**
-Add any other context or screenshots about the feature request here.
+## Checklist:
+<!--- Mark the checkboxes accordingly. -->
+<!--- If you're unsure about any of these, don't hesitate to ask. We're here to help! -->
+- [ ] I have performed a self-review of my own code.
+- [ ] I have added comments on my code changes where required.
+- [ ] I have tested my code changes and other connected areas.
