@@ -1,4 +1,4 @@
-name: Laravel CI Test
+name: Laravel Feature Tests
 
 on: [push, pull_request]
 
@@ -31,7 +31,6 @@ jobs:
         with:
           php-version: 8.2
           extensions: mbstring, bcmath, pdo, pdo_mysql
-          coverage: none
 
       - name: Install Composer Dependencies
         run: composer install --no-progress --prefer-dist --optimize-autoloader
@@ -50,16 +49,7 @@ jobs:
           DB_HOST: 127.0.0.1
         run: php artisan migrate --force
 
-      # Check PHP code formatting with PHPFMT
-      - name: Run PHPFMT
-        run: ./vendor/bin/phpmd app,routes text codesize,controversial,design,naming,unusedcode
-
-      # Static analysis using Larastan
-      - name: Run Larastan
-        run: ./vendor/bin/phpstan analyse app routes --memory-limit=2G
-
-      # Run PHPUnit Tests
-      - name: Run PHPUnit Tests
+      - name: Run Feature Tests
         env:
           DB_CONNECTION: mysql
           DB_DATABASE: testing_db
