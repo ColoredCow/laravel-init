@@ -7,6 +7,7 @@ namespace App\Http\Controllers;
  *     title="Your Laravel API",
  *     version="1.0.0",
  *     description="Swagger documentation for Laravel APIs",
+ *
  *     @OA\Contact(
  *         email="youremail@example.com"
  *     )
